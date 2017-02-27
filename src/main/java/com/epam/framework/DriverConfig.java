@@ -11,15 +11,16 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Set;
 
 /**
  * Created by Uliana Pizhanska on 27/02/2017.
  */
 public class DriverConfig {
 
-    private WebDriver getDriver( DesiredCapabilities dc){
+    private WebDriver getDriver(DesiredCapabilities dc) {
         WebDriver driver;
-        switch (Config.getProperty(Config.BROWSER)){
+        switch (Config.getProperty(Config.BROWSER)) {
             case "chrome":
                 driver = new ChromeDriver(dc);
                 break;
@@ -30,7 +31,7 @@ public class DriverConfig {
         }
         return driver;
 
-        }
+    }
 
     private DesiredCapabilities getDesireCapabilities(String browser) {
         DesiredCapabilities dc;
@@ -59,5 +60,22 @@ public class DriverConfig {
         driver = getDriver(dc);
         return driver;
     }
+
+    public void stopDriver() {
+        WebDriver driver = getDriver();
+        if (driver != null) {
+            Set<String> windowHandles = driver.getWindowHandles();
+            if (windowHandles.size() == 1) {
+                driver.close();
+                driver.quit();
+            } else {
+                for (String handle : windowHandles) {
+                    driver.switchTo().window(handle);
+                    driver.close();
+                    driver.quit();
+                }
+            }
+        }
     }
+}
 
