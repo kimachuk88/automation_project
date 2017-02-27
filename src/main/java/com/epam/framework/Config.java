@@ -26,9 +26,7 @@ public class Config {
     public static String getProperty(String key) {
         try {
             if (config == null) {
-                String configName = System.getenv("TEST_CONFIG");
-                if (configName == null) configName = DEFAULT_CONFIG_NAME;
-                String fileName = String.format(PROPERTY_FILE, configName);
+                String fileName = String.format(PROPERTY_FILE, DEFAULT_CONFIG_NAME);
                 config = loadProperties(fileName);
             }
             if (config.containsKey(key)) {
