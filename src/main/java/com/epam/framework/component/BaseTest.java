@@ -4,10 +4,12 @@ import com.epam.framework.Config;
 import com.epam.framework.DriverConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
@@ -37,5 +39,13 @@ public abstract class BaseTest {
         }
     }
 
-
+    @AfterClass(alwaysRun = true)
+    public void afterClass() throws IOException {
+        driverConfig = new DriverConfig();
+        try {
+            driverConfig.stopDriver();
+        } catch (Exception e) {
+            log.warn("WebDriver stop fail");
+        }
+    }
 }
