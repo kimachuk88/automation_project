@@ -17,10 +17,11 @@ import java.net.URL;
  */
 public class DriverConfig {
 
-    private WebDriver getDriver(DesiredCapabilities dc){
+    private WebDriver getDriver( DesiredCapabilities dc){
         WebDriver driver;
         switch (Config.getProperty(Config.BROWSER)){
             case "chrome":
+                System.setProperty("webdriver.chrome.driver", getClass().getResource("/drivers/chromedriver.exe").getPath());
                 driver = new ChromeDriver(dc);
                 break;
             case "firefox":
@@ -54,14 +55,10 @@ public class DriverConfig {
     private WebDriver getDriver() {
         String startUrl = Config.getProperty(Config.URL);
         String browser = Config.getProperty(Config.BROWSER);
-        System.setProperty("webdriver.chrome.driver", getClass().getResource("/drivers/chromedriver.exe").getPath());
         DesiredCapabilities dc = getDesireCapabilities(browser);
         WebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(new URL(startUrl), dc);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        driver = getDriver(dc);
+        driver.get(startUrl);
         return driver;
     }
 
