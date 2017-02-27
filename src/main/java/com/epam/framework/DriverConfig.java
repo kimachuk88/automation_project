@@ -21,7 +21,6 @@ public class DriverConfig {
         WebDriver driver;
         switch (Config.getProperty(Config.BROWSER)){
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", getClass().getResource("/drivers/chromedriver.exe").getPath());
                 driver = new ChromeDriver(dc);
                 break;
             case "firefox":
@@ -52,15 +51,13 @@ public class DriverConfig {
         return dc;
     }
 
-    private WebDriver getDriver() {
-        String startUrl = Config.getProperty(Config.URL);
+    public WebDriver getDriver() {
         String browser = Config.getProperty(Config.BROWSER);
+        System.setProperty("webdriver.chrome.driver", getClass().getResource("/drivers/chromedriver.exe").getPath());
         DesiredCapabilities dc = getDesireCapabilities(browser);
         WebDriver driver = null;
         driver = getDriver(dc);
-        driver.get(startUrl);
         return driver;
     }
-
     }
 
