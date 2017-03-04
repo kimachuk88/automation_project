@@ -1,5 +1,6 @@
 package com.epam.framework.controls.base;
 
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.internal.WrapsElement;
@@ -10,8 +11,6 @@ import org.openqa.selenium.internal.WrapsElement;
 public interface WebControl extends WebElement,WrapsElement,Locatable {
 
     default boolean elementWired(WebElement element) {
-
         return (element != null);
-
     }
 }

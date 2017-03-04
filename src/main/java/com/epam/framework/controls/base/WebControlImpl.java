@@ -98,7 +98,6 @@ public abstract class WebControlImpl implements WebControl {
     public void clear() {
         element.clear();
     }
-
     @Override
     public WebElement getWrappedElement() {
         return element;
@@ -107,5 +106,14 @@ public abstract class WebControlImpl implements WebControl {
     @Override
     public Coordinates getCoordinates() {
         return ((Locatable) element).getCoordinates();
+    }
+
+    @Override
+    public Rectangle getRect(){
+        return this.element.getRect();}
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+        return this.element.getScreenshotAs(outputType);
     }
 }
