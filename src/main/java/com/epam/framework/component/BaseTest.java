@@ -1,7 +1,6 @@
 package com.epam.framework.component;
 
 import com.epam.framework.Config;
-import com.epam.framework.DriverConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -17,10 +16,10 @@ import java.util.concurrent.TimeUnit;
  * Created by Uliana Pizhanska on 28/02/2017.
  */
 public abstract class BaseTest {
-
+/*
     protected Logger log = Logger.getLogger("WD: ");
     protected WebDriver driver;
-    protected DriverConfig driverConfig;
+//    protected DriverConfig driverConfig;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
@@ -47,5 +46,5 @@ public abstract class BaseTest {
         } catch (Exception e) {
             log.warn("WebDriver stop fail");
         }
-    }
+    }*/
 }
