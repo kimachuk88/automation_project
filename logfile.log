@@ -1,0 +1,10 @@
+2017-03-04 22:47:20,694 INFO  [WD: ] Create instance of Chrome Driver 
+2017-03-04 22:47:24,604 ERROR [WD] WebElement can't be represented as class com.epam.framework.controls.extension.Input 
+2017-03-04 22:47:29,443 INFO  [WD: ] Browser is closed 
+2017-03-04 22:50:40,573 INFO  [WD: ] Create instance of Chrome Driver 
+2017-03-04 22:52:37,244 ERROR [WD] WebElement can't be represented as class com.epam.framework.controls.extension.Input 
+2017-03-04 22:52:59,817 INFO  [WD: ] Browser is closed 
+2017-03-04 23:23:42,144 INFO  [WD: ] Create instance of Chrome Driver 
+2017-03-04 23:23:47,627 INFO  [WD: ] Browser is closed 
+2017-03-04 23:27:08,062 INFO  [WD: ] Create instance of Chrome Driver 
+2017-03-04 23:28:19,217 INFO  [WD: ] Create instance of Chrome Driver 
