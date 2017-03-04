@@ -1,5 +1,6 @@
-package com.epam.framework;
+package com.epam.framework.utility;
 
+import com.epam.framework.utility.Config;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

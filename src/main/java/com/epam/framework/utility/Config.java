@@ -1,4 +1,4 @@
-package com.epam.framework;
+package com.epam.framework.utility;
 
 import java.io.InputStream;
 import java.util.Properties;

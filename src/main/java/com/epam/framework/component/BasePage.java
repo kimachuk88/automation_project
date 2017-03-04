@@ -1,6 +1,4 @@
 package com.epam.framework.component;
-
-import com.epam.framework.DriverConfig;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
@@ -11,6 +9,7 @@ public abstract class BasePage {
 
     protected WebDriver driver;
     protected Logger log = Logger.getLogger("WD: ");
+
 
 
 

@@ -1,9 +1,6 @@
 package com.epam.framework.controls.base;
 
-import com.epam.framework.Driver;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 

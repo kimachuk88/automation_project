@@ -1,17 +1,5 @@
 package com.epam.framework.component;
 
-import com.epam.framework.Config;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by Uliana Pizhanska on 28/02/2017.
  */
