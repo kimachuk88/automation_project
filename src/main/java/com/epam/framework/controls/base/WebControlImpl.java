@@ -1,5 +1,6 @@
 package com.epam.framework.controls.base;
 
+import com.epam.framework.utility.Driver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
@@ -112,5 +113,9 @@ public abstract class WebControlImpl implements WebControl {
     @Override
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return this.element.getScreenshotAs(outputType);
+    }
+
+    public void clickJS() {
+        ((JavascriptExecutor)Driver.instance).executeScript("arguments[0].click();", element);
     }
 }
