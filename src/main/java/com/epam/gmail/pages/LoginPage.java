@@ -1,5 +1,6 @@
 package com.epam.gmail.pages;
 
+import com.epam.framework.controls.extension.Button;
 import com.epam.framework.controls.extension.Input;
 import com.epam.framework.utility.Config;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,18 @@ public class LoginPage extends BasePage{
     @FindBy(id = "Email")
     private Input emailField;
 
+    @FindBy(id = "next")
+    private Button btnNext;
+
+
+
     public void setEmail(){
         emailField.setText(Config.getProperty(Config.USERNAME));
     }
+
+    public void clickNext(){
+        btnNext.click();
+    }
+
+
 }

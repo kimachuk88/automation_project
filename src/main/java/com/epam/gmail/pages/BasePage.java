@@ -11,17 +11,7 @@ public abstract class BasePage {
 
     protected Logger log = Logger.getLogger("WD: ");
 
-    public BasePage(){
-        PageFactory.initElements(new CustomFieldDecorator(Driver.instance),this);
+    public BasePage() {
+        PageFactory.initElements(new CustomFieldDecorator(Driver.instance), this);
     }
-
-
-
-
-
-
-
-
-
-
 }
