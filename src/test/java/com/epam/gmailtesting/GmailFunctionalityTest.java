@@ -12,18 +12,14 @@ public class GmailFunctionalityTest extends BaseTest {
 
     private SendMessageBO sendMessageBO;
 
-    @Test(dataProviderClass = DataProvd.class, dataProvider = "loginTitle")
-    public void login(String homeTitle, String accountName){
+    @Test(dataProviderClass = DataProvd.class, dataProvider = "loginAndCreateMessage",priority = 1)
+    public void login(String homeTitle, String accountName, String receiveEmail, String messageText){
         sendMessageBO = new SendMessageBO();
         String title = sendMessageBO.checkPageTitle();
         Assert.assertEquals(title, homeTitle);
         sendMessageBO.login();
-    }
-
-    @Test(dataProviderClass = DataProvd.class, dataProvider = "loginTitle")
-    public void SendMessage(String accountName){
-        String title = sendMessageBO.checkMessagePageTitle();
-        System.out.println(title);
-        Assert.assertTrue(title.contains(accountName));
+        title = sendMessageBO.checkAccountName();
+        Assert.assertEquals(title, accountName);
+        sendMessageBO.createMessage(receiveEmail);
     }
 }

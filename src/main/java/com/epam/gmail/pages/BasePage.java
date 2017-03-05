@@ -30,7 +30,7 @@ public abstract class BasePage {
     }
 
     public void waitForPageLoad() {
-        new WebDriverWait(Driver.instance, 30).until((ExpectedCondition<Boolean>) wd ->
+        new WebDriverWait(Driver.instance, 60).until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
@@ -50,7 +50,6 @@ public abstract class BasePage {
     public String getPageTitle(){
         return Driver.instance.getTitle();
     }
-
 
 }
 

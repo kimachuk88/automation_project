@@ -7,10 +7,10 @@ import org.testng.annotations.DataProvider;
  */
 public class DataProvd {
 
-    @DataProvider(name="loginTitle")
+    @DataProvider(name="loginAndCreateMessage")
     public static Object[][] loginTitle(){
         return new Object[][]{
-                {"Gmail", "Uliana Hutnikevych"}
+                {"Gmail", "Uliana Hutnikevych", "pizhanska29@gmail.com", "TestMessage"}
         };
     }
 }
