@@ -23,13 +23,13 @@ public abstract class BasePage {
         PageFactory.initElements(new CustomFieldDecorator(Driver.instance), this);
     }
 
-    protected boolean waitForControl(WebElement webControl) {
+    public boolean waitForControl(WebElement webControl) {
         log.info("Wait page to be loaded");
         wait = getWait(60);
         return wait.until(webDriver -> webControl != null && webControl.isDisplayed());
     }
 
-    void waitForPageLoad() {
+    public void waitForPageLoad() {
         new WebDriverWait(Driver.instance, 30).until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
