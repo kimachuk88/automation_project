@@ -13,4 +13,12 @@ public class Label extends WebControlImpl {
     public Label(WebElement element) {
         super(element);
     }
+
+    public static String getText(WebControlImpl webControl) {
+        if (webControl != null) {
+            String containerValue = webControl.getText();
+            return containerValue;
+        }
+        return null;
+    }
 }
