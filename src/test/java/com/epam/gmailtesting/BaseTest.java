@@ -21,10 +21,11 @@ public abstract class BaseTest {
 
 
     @BeforeClass(alwaysRun = true)
-    public void beforeClass() {
+    public void beforeClass()  {
         Driver.getWebDriverInstance();
         Driver.instance.get(Config.getProperty(Config.URL));
         Driver.instance.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        Driver.instance.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Driver.instance.manage().window().maximize();
     }
 
