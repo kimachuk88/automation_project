@@ -20,6 +20,8 @@ public class GmailFunctionalityTest extends BaseTest {
         sendMessageBO.login();
         title = sendMessageBO.checkAccountName();
         Assert.assertEquals(title, accountName);
-        sendMessageBO.createMessage(receiveEmail);
+        sendMessageBO.createMessage(receiveEmail,messageText);
+        title = sendMessageBO.checkSentMessage();
+        Assert.assertEquals(title,messageText);
     }
 }
