@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class BasePage {
 
-    protected Logger log = Logger.getLogger("WD: ");
+    protected Logger log = Logger.getLogger("WD");
     protected Wait<WebDriver> wait;
 
     public BasePage() {
@@ -24,7 +24,7 @@ public abstract class BasePage {
     }
 
     public boolean waitForControl(WebElement webControl) {
-        log.info("Wait page to be loaded");
+        log.info("Wait for get control of element");
         wait = getWait(60);
         return wait.until(webDriver -> webControl != null && webControl.isDisplayed());
     }
@@ -32,6 +32,7 @@ public abstract class BasePage {
     public void waitForPageLoad() {
         new WebDriverWait(Driver.instance, 60).until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+        log.info("Wait for page load");
     }
 
     private FluentWait getWait(int timeout) {
@@ -48,7 +49,9 @@ public abstract class BasePage {
     }
 
     public String getPageTitle(){
-        return Driver.instance.getTitle();
+        String title = Driver.instance.getTitle();
+        log.info("Title of current page: " + title);
+        return title;
     }
 
 }
