@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -37,8 +40,19 @@ public class Driver {
                     log.info("Create instance of Chrome Driver");
                     break;
                 case "firefox":
-                    instance = new FirefoxDriver();
+                    System.setProperty("webdriver.gecko.driver",new File((PATH_TO_DRIVERS_REPOSITORY + "geckodriver.exe")).getPath());
+                    FirefoxProfile profile = new FirefoxProfile();
+                    profile.setPreference("capability.policy.default.Window.Quer‌​yInterface", "allAccess");
+                    profile.setPreference("capability.policy.default.Window.fram‌​eElement.get","allAc‌​cess");
+                    profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+                    DesiredCapabilities cp = new DesiredCapabilities();
+                    cp.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                    instance = new FirefoxDriver(cp);
                     log.info("Create instance of FF Driver");
+                    break;
+                case "ie":
+                    System.setProperty("webdriver.ie.driver", new File(PATH_TO_DRIVERS_REPOSITORY +"IEDriverServer.exe").getPath());
+                    instance = new InternetExplorerDriver();
                     break;
                 default:
                     throw new IllegalArgumentException("Browser is not supported:" + Config.getProperty(Config.BROWSER));
