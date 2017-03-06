@@ -3,8 +3,15 @@ package com.epam.framework.utility;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -12,21 +19,26 @@ import java.util.Set;
  */
 public class Driver {
 
-    private static Logger log = Logger.getLogger("WD: ");
+    private static Logger log = Logger.getLogger("WD");
     public static WebDriver instance;
+    private static final String PATH_TO_DRIVERS_REPOSITORY = "src/main/resources/drivers/";
 
     private Driver(){}
 
-    public static WebDriver getWebDriverInstance() {
+    public static WebDriver getWebDriverInstance()  {
         if (instance == null) {
             switch (Config.getProperty(Config.BROWSER)) {
                 case "chrome":
-                    System.setProperty("webdriver.chrome.driver", "C:\\Users\\Uliana Pizhanska\\Downloads\\cdp\\automation_project\\src\\main\\resources\\drivers\\chromedriver.exe");
-                    instance = new ChromeDriver();
+                    System.setProperty("webdriver.chrome.driver",new File(PATH_TO_DRIVERS_REPOSITORY + "chromedriver.exe").getPath());
+                    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                    ChromeOptions options = new ChromeOptions();
+                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                    instance = new ChromeDriver(capabilities);
                     log.info("Create instance of Chrome Driver");
                     break;
                 case "firefox":
                     instance = new FirefoxDriver();
+                    log.info("Create instance of FF Driver");
                     break;
                 default:
                     throw new IllegalArgumentException("Browser is not supported:" + Config.getProperty(Config.BROWSER));
@@ -47,5 +59,7 @@ public class Driver {
             }
             instance = null;
         }
+
+
 }
 
