@@ -15,4 +15,10 @@ buildNumber.properties
 *.log
 log/
 target/
-
+*.png
+*.html
+*.xml
+*.js
+*.css
+*.gif
+*.log
