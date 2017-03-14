@@ -30,9 +30,11 @@
                         </property>
                         <property>
                             <name>listener</name>
-                            <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
+                            <value>package com.epam.framework.utility.BaseHTMLReporter</value>
                         </property>
                     </properties>
+                    <reportsDirectory>${project.basedir}/target</reportsDirectory>
+                    <workingDirectory>${project.basedir}</workingDirectory>
                 </configuration>
             </plugin>
 
@@ -63,21 +65,29 @@
             <version>LATEST</version>
         </dependency>
         <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
             <groupId>org.uncommons</groupId>
             <artifactId>reportng</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
+            <version>1.1.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.testng</groupId>
                     <artifactId>testng</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
+                </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>velocity</groupId>
-            <artifactId>velocity-dep</artifactId>
-            <version>1.4</version>
         </dependency>
     </dependencies>
 </project>
