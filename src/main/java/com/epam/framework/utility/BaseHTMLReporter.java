@@ -30,7 +30,7 @@ public class BaseHTMLReporter  extends HTMLReporter implements ITestListener {
     public void onTestFailure(final ITestResult result)  {
         if (!result.isSuccess()) {
             try {
-                String failureImageFileName = result.getName()+"." + new SimpleDateFormat("MM-dd-yyyy_HH-ss").format(new Date()) + ".png";
+                String failureImageFileName = result.getName() + ".png";
                 File scrFile = ((TakesScreenshot) Driver.instance).getScreenshotAs(OutputType.FILE);
                 FileUtils.copyFile(scrFile, new File("test-output/"+failureImageFileName ));
                 System.setProperty(ESCAPE_PROPERTY, "false");
