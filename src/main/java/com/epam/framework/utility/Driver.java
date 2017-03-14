@@ -40,14 +40,7 @@ public class Driver {
                     log.info("Create instance of Chrome Driver");
                     break;
                 case "firefox":
-                    System.setProperty("webdriver.gecko.driver",new File((PATH_TO_DRIVERS_REPOSITORY + "geckodriver.exe")).getPath());
-                    FirefoxProfile profile = new FirefoxProfile();
-                    profile.setPreference("capability.policy.default.Window.Quer‌​yInterface", "allAccess");
-                    profile.setPreference("capability.policy.default.Window.fram‌​eElement.get","allAc‌​cess");
-                    profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
-                    DesiredCapabilities cp = new DesiredCapabilities();
-                    cp.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                    instance = new FirefoxDriver(cp);
+                    instance = new FirefoxDriver();
                     log.info("Create instance of FF Driver");
                     break;
                 case "ie":
