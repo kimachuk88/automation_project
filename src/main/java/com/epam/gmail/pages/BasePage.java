@@ -25,8 +25,8 @@ public abstract class BasePage {
 
     public boolean waitForControl(WebElement webControl) {
         log.info("Wait for get control of element");
-        wait = getWait(60);
-        return wait.until(webDriver -> webControl != null && webControl.isDisplayed());
+        wait = getWait(120);
+        return wait.until(webDriver -> webControl != null && webControl.isEnabled() && webControl.isDisplayed());
     }
 
     public void waitForPageLoad() {
