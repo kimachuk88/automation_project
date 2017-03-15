@@ -11,14 +11,15 @@ import java.util.Properties;
  */
 public class DataProvd {
 
-
-    public static Object[][] loginTitl(){
+    @DataProvider(name="login")
+    public static Object[][] loginTitle(){
         return new Object[][]{
-                {"Gmail", "Uliana Hutnikevych", "pizhanska29@gmail.com", "TestMessage"}
+                {"Gmail"}
         };
     }
-    @DataProvider(name="loginAndCreateMessage")
-    public static Object[][] loginTitle() {
+
+    @DataProvider(name="createMessage")
+    public static Object[][] createMessage() {
         Properties cred = new Properties();
         try {
             FileInputStream input = new FileInputStream("src/main/resources/input.properties");
@@ -26,11 +27,10 @@ public class DataProvd {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Object[][] creds = new Object[1][4];
-        creds[0][0] = cred.getProperty("title");
-        creds[0][1] = cred.getProperty("account");
-        creds[0][2] = cred.getProperty("email");
-        creds[0][3] = cred.getProperty("subj");
+        Object[][] creds = new Object[1][3];
+        creds[0][0] = cred.getProperty("account");
+        creds[0][1] = cred.getProperty("email");
+        creds[0][2] = cred.getProperty("subj");
         return creds;
     }
 }
