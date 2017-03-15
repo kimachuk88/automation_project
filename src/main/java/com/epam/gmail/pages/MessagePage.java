@@ -18,6 +18,9 @@ public class MessagePage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Sent')]")
     private Button btnSentFolder;
 
+    @FindBy(xpath = "//a[contains(text(),'Drafts')]")
+    private Button btnDraftsFolder;
+
     @FindBy(xpath="//*[@class='gb_vb gb_wb']")
     private Label accountName;
 
@@ -29,6 +32,9 @@ public class MessagePage extends BasePage {
 
     @FindBy(xpath = "//input[@name = 'subjectbox']")
     private Input subject;
+
+    @FindBy(xpath = "//img[@aria-label='Save & Close']")
+    private Button btnCloseMessage ;
 
     @FindBy(xpath = "//div[@aria-label='Message Body']")
     private Input messageBody;
@@ -72,5 +78,15 @@ public class MessagePage extends BasePage {
     public void clickOnSentFolder(){
         waitForControl(btnSentFolder);
         btnSentFolder.click();
+    }
+
+    public void clickOnDraftsFolder(){
+        waitForControl(btnDraftsFolder);
+        btnDraftsFolder.click();
+    }
+
+    public void clickOnCloseMessage(){
+        waitForControl(btnCloseMessage);
+        btnCloseMessage.click();
     }
 }

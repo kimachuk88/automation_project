@@ -1,5 +1,7 @@
 package com.epam.gmail.bo;
 
+import com.epam.framework.utility.Config;
+import com.epam.framework.utility.Driver;
 import com.epam.gmail.pages.LoginPage;
 import com.epam.gmail.pages.MessagePage;
 import com.epam.gmail.pages.SentMessagesPage;
@@ -38,15 +40,26 @@ public class SendMessageBO extends BaseBO{
         messagePage.setReceiver(receiveEmail);
         messagePage.setSubjectMessage(msgText);
         messagePage.setMessageBodyField(msgText);
+    }
+
+    public void sendMessage(){
         messagePage.clickOnSend();
         log.info("Sending message");
-        messagePage.clickOnSentFolder();
     }
 
     public String checkSentMessage(){
+        if (! Config.getProperty(Config.BROWSER).equalsIgnoreCase("ie")) {
+            messagePage.clickOnSentFolder();
+        }
         sentMessagesPage.clickOnViewMessage();
         log.info("Check Sent folder");
         return sentMessagesPage.getSubTitle();
+    }
+
+    public void deleteFromDrafts() {
+        messagePage.clickOnCloseMessage();
+        messagePage.clickOnDraftsFolder();
+        log.info("Go to Drafts");
     }
 
 }
