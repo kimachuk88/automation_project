@@ -58,7 +58,7 @@ public class SendMessageBO extends BaseBO{
     }
 
     public void deleteFromDrafts() {
-       // messagePage.clickOnCloseMessage();
+        messagePage.clickOnCloseMessage();
         messagePage.clickOnDraftsFolder();
         log.info("Go to Drafts");
        // messagePage.checkDraftMessage();

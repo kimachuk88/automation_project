@@ -32,7 +32,7 @@ public class GmailFunctionalityTest extends BaseTest {
             dataProviderClass = DataProvd.class, dataProvider = "createMessage")
     public void sendMessage(String accountName, String receiveEmail, String messageText){
         String title = sendMessageBO.checkAccountName();
-//        Assert.assertEquals(title, accountName);
+        Assert.assertEquals(title, accountName);
         sendMessageBO.createMessage(receiveEmail,messageText);
         sendMessageBO.sendMessage();
         title = sendMessageBO.checkSentMessage();
@@ -42,13 +42,13 @@ public class GmailFunctionalityTest extends BaseTest {
     }
 
     @Test( dependsOnMethods = "login", description = "" +
-            "1. Create search with DB in and out of subscription\n" +
-            "2. Set view hits option - View hits: all, Custom price: Trademark Only\n" +
-            "3. Open Basic Report from hitcount(no price warning)\n", dataProviderClass = DataProvd.class, dataProvider = "createMessage")
+            "1. Check account name and click on Compose Message\n" +
+            "2. Set receiver, message subject and message body, click on Send\n" +
+            "3. Go to Drafts folder and check if message is saved and delete it", dataProviderClass = DataProvd.class, dataProvider = "createMessage")
     public void saveAsDraftAndDelete(String accountName, String receiveEmail, String messageText){
         String title = sendMessageBO.checkAccountName();
-//        Assert.assertEquals(title, accountName);
-      //  sendMessageBO.createMessage(receiveEmail,messageText);
+        Assert.assertEquals(title, accountName);
+        sendMessageBO.createMessage(receiveEmail,messageText);
         sendMessageBO.deleteFromDrafts();
         long id = Thread.currentThread().getId();
         System.out.println("Simple test-method Two. Thread id is: " + id);
