@@ -12,16 +12,45 @@ public class GmailFunctionalityTest extends BaseTest {
 
     private SendMessageBO sendMessageBO;
 
-    @Test(dataProviderClass = DataProvd.class, dataProvider = "loginAndCreateMessage",priority = 1)
-    public void login(String homeTitle, String accountName, String receiveEmail, String messageText){
+    public void setup(){
         sendMessageBO = new SendMessageBO();
+    }
+
+
+    @Test(description = "Login, open custom search page\n",  dataProviderClass = DataProvd.class, dataProvider = "login")
+    public void login(String homeTitle){
+        setup();
         String title = sendMessageBO.checkPageTitle();
         Assert.assertEquals(title, homeTitle);
         sendMessageBO.login();
-        title = sendMessageBO.checkAccountName();
-        Assert.assertEquals(title, accountName);
+    }
+
+    @Test( dependsOnMethods = "login", description = "" +
+            "1. Check account name and click on Compose Message\n" +
+            "2. Set receiver, message subject and message body, click on Send\n" +
+            "3. Go to Sent folder and check details of sent message\n",
+            dataProviderClass = DataProvd.class, dataProvider = "createMessage")
+    public void sendMessage(String accountName, String receiveEmail, String messageText){
+        String title = sendMessageBO.checkAccountName();
+//        Assert.assertEquals(title, accountName);
         sendMessageBO.createMessage(receiveEmail,messageText);
+        sendMessageBO.sendMessage();
         title = sendMessageBO.checkSentMessage();
         Assert.assertEquals(title,messageText);
+        long id = Thread.currentThread().getId();
+        System.out.println("Simple test-method One. Thread id is: " + id);
+    }
+
+    @Test( dependsOnMethods = "login", description = "" +
+            "1. Create search with DB in and out of subscription\n" +
+            "2. Set view hits option - View hits: all, Custom price: Trademark Only\n" +
+            "3. Open Basic Report from hitcount(no price warning)\n", dataProviderClass = DataProvd.class, dataProvider = "createMessage")
+    public void saveAsDraftAndDelete(String accountName, String receiveEmail, String messageText){
+        String title = sendMessageBO.checkAccountName();
+//        Assert.assertEquals(title, accountName);
+      //  sendMessageBO.createMessage(receiveEmail,messageText);
+        sendMessageBO.deleteFromDrafts();
+        long id = Thread.currentThread().getId();
+        System.out.println("Simple test-method Two. Thread id is: " + id);
     }
 }
