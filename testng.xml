@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Class1Suite" parallel="methods" thread-count="2">
+<test name="instances">
+    <classes>
+        <class name="com.epam.gmailtesting.GmailFunctionalityTest"></class>
+    </classes>
+</test>
+</suite>
