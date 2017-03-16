@@ -1,6 +1,7 @@
 package com.epam.gmail.pages;
 
 import com.epam.framework.controls.extension.Button;
+import com.epam.framework.controls.extension.CheckBox;
 import com.epam.framework.controls.extension.Input;
 import com.epam.framework.controls.extension.Label;
 import com.epam.framework.utility.Driver;
@@ -41,6 +42,9 @@ public class MessagePage extends BasePage {
 
     @FindBy(xpath = "//*[text() = 'Send']")
     private Button btnSend;
+
+    @FindBy(xpath = "//div[contains(@class, 'oZ-jc T-Jo J-J5-Ji')][1]")
+    private CheckBox chkDraftMessage;
 
     public void clickOnAccountInfo(){
         waitForPageLoad();
@@ -88,5 +92,10 @@ public class MessagePage extends BasePage {
     public void clickOnCloseMessage(){
         waitForControl(btnCloseMessage);
         btnCloseMessage.click();
+    }
+
+    public void checkDraftMessage(){
+        waitForControl(chkDraftMessage);
+        chkDraftMessage.check();
     }
 }

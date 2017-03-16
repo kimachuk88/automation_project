@@ -28,6 +28,7 @@ public class SendMessageBO extends BaseBO{
     }
 
     public String checkAccountName(){
+        messagePage.waitForPageLoad();
         messagePage.clickOnAccountInfo();
         log.info("Click on Info icon");
         return messagePage.getAccountName();
@@ -57,9 +58,11 @@ public class SendMessageBO extends BaseBO{
     }
 
     public void deleteFromDrafts() {
-        messagePage.clickOnCloseMessage();
+       // messagePage.clickOnCloseMessage();
         messagePage.clickOnDraftsFolder();
         log.info("Go to Drafts");
+       // messagePage.checkDraftMessage();
     }
+
 
 }
