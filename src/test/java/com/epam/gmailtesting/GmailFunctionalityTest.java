@@ -37,8 +37,6 @@ public class GmailFunctionalityTest extends BaseTest {
         sendMessageBO.sendMessage();
         title = sendMessageBO.checkSentMessage();
         Assert.assertEquals(title,messageText);
-        long id = Thread.currentThread().getId();
-        System.out.println("Simple test-method One. Thread id is: " + id);
     }
 
     @Test( dependsOnMethods = "login", description = "" +
@@ -50,7 +48,5 @@ public class GmailFunctionalityTest extends BaseTest {
         Assert.assertEquals(title, accountName);
         sendMessageBO.createMessage(receiveEmail,messageText);
         sendMessageBO.deleteFromDrafts();
-        long id = Thread.currentThread().getId();
-        System.out.println("Simple test-method Two. Thread id is: " + id);
     }
 }
