@@ -28,13 +28,13 @@
                             <name>usedefaultlisteners</name>
                             <value>false</value>
                         </property>
-                        <property>
-                            <name>listener</name>
-                            <value>package com.epam.framework.utility.BaseHTMLReporter</value>
-                        </property>
+                        <listeners>
+                            <listener class-name="package com.epam.framework.utility.BaseHTMLReporter"/>
+                        </listeners>
                     </properties>
                     <reportsDirectory>${project.basedir}/target</reportsDirectory>
                     <workingDirectory>${project.basedir}</workingDirectory>
+
                 </configuration>
             </plugin>
 

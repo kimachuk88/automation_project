@@ -28,7 +28,7 @@ public class BaseHTMLReporter  extends HTMLReporter implements ITestListener {
 
     @Override
     public void onTestFailure(final ITestResult result)  {
-        if (!result.isSuccess()) {
+       if (!result.isSuccess()) {
             try {
                 String failureImageFileName = result.getName() + ".png";
                 File scrFile = ((TakesScreenshot) Driver.instance).getScreenshotAs(OutputType.FILE);
