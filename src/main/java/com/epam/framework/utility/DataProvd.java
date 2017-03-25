@@ -1,11 +1,13 @@
 package com.epam.framework.utility;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.DataProvider;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,5 +34,13 @@ public class DataProvd {
                 .collect(Collectors.toList());
         String[][] data = list.toArray(new String[list.size()][]);
         return data;
+    }
+
+    @DataProvider(name = "invalidLogin")
+    public static Object[][] invalidLogin() {
+        String invalidString = RandomStringUtils.randomAlphanumeric(257).toUpperCase();
+        return new Object[][]{
+                {"$%^&*(ldld"}, {"uuuliana"}, {"1234osk"}, {invalidString}
+        };
     }
 }
