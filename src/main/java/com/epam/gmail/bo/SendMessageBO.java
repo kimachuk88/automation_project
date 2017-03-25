@@ -14,11 +14,12 @@ public class SendMessageBO extends BaseBO{
     private MessagePage messagePage = new MessagePage();
     private SentMessagesPage sentMessagesPage = new SentMessagesPage();
 
-    public void login(){
-        loginPage.setEmail();
+    public void login(String email, String password){
+        loginPage.setEmail(email);
         loginPage.clickNext();
-        loginPage.setPassword();
-        loginPage.clickSignIn();
+        loginPage.setPassword(password);
+        loginPage.uncheckStaySignedIn();
+        //loginPage.clickSignIn();
         log.info("Credentials for sign in are entered");
     }
 

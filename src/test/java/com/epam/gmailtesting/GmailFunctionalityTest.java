@@ -1,5 +1,6 @@
 package com.epam.gmailtesting;
 
+import com.epam.framework.utility.Config;
 import com.epam.framework.utility.DataProvd;
 import com.epam.gmail.bo.SendMessageBO;
 import org.testng.Assert;
@@ -22,7 +23,7 @@ public class GmailFunctionalityTest extends BaseTest {
         setup();
         String title = sendMessageBO.checkPageTitle();
         Assert.assertEquals(title, homeTitle);
-        sendMessageBO.login();
+        sendMessageBO.login(Config.getProperty(Config.USERNAME),Config.getProperty(Config.PASSWORD));
     }
 
     @Test( dependsOnMethods = "login", description = "" +

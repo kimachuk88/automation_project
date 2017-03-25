@@ -1,6 +1,7 @@
 package com.epam.gmail.pages;
 
 import com.epam.framework.controls.extension.Button;
+import com.epam.framework.controls.extension.CheckBox;
 import com.epam.framework.controls.extension.Input;
 import com.epam.framework.controls.extension.Label;
 import com.epam.framework.utility.Config;
@@ -25,8 +26,11 @@ public class LoginPage extends BasePage {
     @FindBy(id = "signIn")
     private Button btnSignIn;
 
-    public void setEmail() {
-        emailField.setText(Config.getProperty(Config.USERNAME));
+    @FindBy(id = "PersistentCookie")
+    private CheckBox chkStaySignedIn;
+
+    public void setEmail(String email) {
+        emailField.setText(email);
     }
 
     public void clickNext() {
@@ -38,14 +42,18 @@ public class LoginPage extends BasePage {
         return Label.getText(profileName);
     }
 
-    public void setPassword() {
+    public void setPassword(String password) {
         waitForControl(passwordField);
-        passwordField.setText(Config.getProperty(Config.PASSWORD));
+        passwordField.setText(password);
     }
 
     public void clickSignIn(){
         btnSignIn.submit();
     }
 
+    public void uncheckStaySignedIn(){
+        waitForControl(chkStaySignedIn);
+        chkStaySignedIn.uncheck();
+    }
 
 }
