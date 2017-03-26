@@ -15,8 +15,6 @@ public class Config {
     public static final String BROWSER = "browser";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
-    public static final String INVALID_PASSWORD = "invalid_password";
-    public static final String INVALID_USERNAME = "invalid_username";
 
     private static Properties loadProperties(String fileName) throws Exception {
         Properties result = new Properties();
