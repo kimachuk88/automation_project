@@ -19,6 +19,9 @@ public class MessagePage extends BasePage {
     @FindBy(xpath = "//a[contains(text(),'Sent')]")
     private Button btnSentFolder;
 
+    @FindBy(xpath = "//a[contains(text(),'Inbox')]")
+    private Button btnInboxFolder;
+
     @FindBy(xpath = "//a[contains(text(),'Drafts')]")
     private Button btnDraftsFolder;
 
@@ -85,6 +88,13 @@ public class MessagePage extends BasePage {
     public void clickOnSentFolder(){
         waitForControl(btnSentFolder);
         btnSentFolder.click();
+        waitForPageLoad();
+    }
+
+    public void clickOnInboxFolder(){
+        waitForControl(btnInboxFolder);
+        btnInboxFolder.click();
+        waitForPageLoad();
     }
 
     public void clickOnDraftsFolder(){

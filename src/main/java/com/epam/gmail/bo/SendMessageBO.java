@@ -44,6 +44,7 @@ public class SendMessageBO extends BaseBO{
         return sentMessagesPage.getSubTitle();
     }
 
+
     public void deleteFromDrafts() {
         messagePage.clickOnCloseMessage();
         messagePage.clickOnDraftsFolder();
@@ -51,5 +52,17 @@ public class SendMessageBO extends BaseBO{
        // messagePage.checkDraftMessage();
     }
 
+    public void checkMessage(){
+        messagePage.clickOnSentFolder();
+        sentMessagesPage.checkMessages();
+        log.info("Message is checked");
+    }
+
+    public void moveToInbox(){
+        sentMessagesPage.clickOnMoveToInbox();
+        messagePage.clickOnInboxFolder();
+        sentMessagesPage.clickOnBtnView();
+
+    }
 
 }

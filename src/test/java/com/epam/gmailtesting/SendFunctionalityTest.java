@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 /**
  * Created by Uliana Pizhanska on 04/03/2017.
  */
-public class GmailFunctionalityTest extends BaseTest {
+public class SendFunctionalityTest extends BaseTest {
 
     private SendMessageBO sendMessageBO;
     private LoginBO loginBO;
@@ -42,12 +42,16 @@ public class GmailFunctionalityTest extends BaseTest {
         Assert.assertEquals(sendMessageBO.checkSentMessage(),messageText);
     }
 
-    @Test( dependsOnMethods = "login", description = "\n" +
+
+    //TO_DO: should be completed
+
+   /* @Test( dependsOnMethods = "sendMessage", description = "\n" +
             "1. Check account name and click on Compose Message\n" +
             "2. Set receiver, message subject and message body, click on Send\n" +
             "3. Go to Drafts folder and check if message is saved and delete it", dataProviderClass = DataProvd.class, dataProvider = "createMessage")
-    public void saveAsDraftAndDelete(String receiveEmail, String messageText){
-        sendMessageBO.createMessage(receiveEmail,messageText);
-        sendMessageBO.deleteFromDrafts();
-    }
+    public void moveToInboxAndDelete(String receiveEmail, String messageText){
+        sendMessageBO.checkMessage();
+        sendMessageBO.moveToInbox();
+    }*/
+
 }
