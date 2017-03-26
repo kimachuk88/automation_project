@@ -21,4 +21,22 @@ public class LoginBO extends BaseBO{
         loginPage.clickNext();
         log.info("Email is entered");
     }
+
+    public String checkPageTitle(){
+        return loginPage.getPageTitle();
+
+    }
+
+    public String getErrorMessage(){
+        return loginPage.getTextError();
+    }
+
+    public String getErrorMessagePasswd(){
+        return loginPage.getTextErrorPasswd();
+    }
+
+    public String getEmailDisplayed(){
+        return loginPage.getDisplayedEmail();
+    }
+
 }
