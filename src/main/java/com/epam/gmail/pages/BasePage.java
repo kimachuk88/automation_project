@@ -29,6 +29,12 @@ public abstract class BasePage {
         return wait.until(webDriver -> webControl != null && webControl.isEnabled() && webControl.isDisplayed());
     }
 
+    public void waitElementToClick(WebElement webElement){
+        waitForControl(webElement);
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+    }
+
+
     public void waitForPageLoad() {
         new WebDriverWait(Driver.instance, 60).until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));

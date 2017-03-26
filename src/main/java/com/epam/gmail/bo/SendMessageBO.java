@@ -10,23 +10,9 @@ import com.epam.gmail.pages.SentMessagesPage;
  * Created by Uliana Pizhanska on 04/03/2017.
  */
 public class SendMessageBO extends BaseBO{
-    private LoginPage loginPage = new LoginPage();
     private MessagePage messagePage = new MessagePage();
     private SentMessagesPage sentMessagesPage = new SentMessagesPage();
 
-    public void login(String email, String password){
-        loginPage.setEmail(email);
-        loginPage.clickNext();
-        loginPage.setPassword(password);
-        loginPage.uncheckStaySignedIn();
-        //loginPage.clickSignIn();
-        log.info("Credentials for sign in are entered");
-    }
-
-    public String checkPageTitle(){
-        return loginPage.getPageTitle();
-
-    }
 
     public String checkAccountName(){
         messagePage.waitForPageLoad();

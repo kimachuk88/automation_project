@@ -2,6 +2,7 @@ package com.epam.gmailtesting;
 
 import com.epam.framework.utility.Config;
 import com.epam.framework.utility.DataProvd;
+import com.epam.gmail.bo.LoginBO;
 import com.epam.gmail.bo.SendMessageBO;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,28 +10,47 @@ import org.testng.annotations.Test;
 /**
  * Created by Uliana Pizhanska on 25/03/2017.
  */
-public class LoginFunctionalityTest {
+public class LoginFunctionalityTest extends BaseTest {
 
     private SendMessageBO sendMessageBO;
+    private LoginBO loginBO;
 
     public void setup(){
         sendMessageBO = new SendMessageBO();
+        loginBO = new LoginBO();
+    }
+
+    @Test(description = "\n" +
+            "1. Go to https://mail.google.com/mail/\n" +
+            "2. Set invalid username (non-existent user) and click on next\n" +
+            "3.  Set invalid username (illegal characters) and click on next\n" +
+            "4.  Set invalid username (over 256 characters ) and click on next\n" , dataProviderClass = DataProvd.class, dataProvider = "invalidLogin")
+    public void loginWithInvalidEmail( String invalidUser, String errorMessage){
+        setup();
+        loginBO.loginEmail(invalidUser);
+        Assert.assertTrue(loginBO.getErrorMessage().contains(errorMessage));
     }
 
 
-    @Test(description = "Login, valid credentials\n",  dataProviderClass = DataProvd.class, dataProvider = "login")
-    public void login(String homeTitle){
+    @Test(description = "\n" +
+            "1. Go to https://mail.google.com/mail/\n" +
+            "2. Set valid username, but invalid password and click on next\n" , dependsOnMethods = "loginWithInvalidEmail", dataProviderClass = DataProvd.class, dataProvider = "invalidPasswd")
+    public void loginWithInvalidPassword(String invalidPasswd, String errorInvPasswd){
         setup();
-        String title = sendMessageBO.checkPageTitle();
-        Assert.assertEquals(title, homeTitle);
-        sendMessageBO.login(Config.getProperty(Config.USERNAME),Config.getProperty(Config.PASSWORD));
+        loginBO.loginEmail(Config.getProperty(Config.USERNAME));
+        loginBO.loginPasswd(invalidPasswd);
+        Assert.assertEquals(loginBO.getErrorMessagePasswd(), errorInvPasswd);
     }
 
-    @Test(description = "Try to login with invalid password\n",  dataProviderClass = DataProvd.class, dataProvider = "login")
-    public void loginWithInvalidPassword(String homeTitle){
-        setup();
-        String title = sendMessageBO.checkPageTitle();
-        Assert.assertEquals(title, homeTitle);
-        sendMessageBO.login(Config.getProperty(Config.USERNAME),Config.getProperty(Config.PASSWORD));
+
+    @Test(description = "\n" +
+            "1. Check email/\n" +
+            "2. Set valid password and click on next\n"+
+            "3. Check account name\n" , dependsOnMethods = "loginWithInvalidPassword", dataProviderClass = DataProvd.class, dataProvider = "login")
+    public void loginWithValidCredentials(String title, String email, String accountName){
+        Assert.assertEquals(loginBO.checkPageTitle(),title);
+        Assert.assertEquals(loginBO.getEmailDisplayed(),email);
+        loginBO.loginPasswd(Config.getProperty(Config.PASSWORD));
+        Assert.assertTrue(sendMessageBO.checkAccountName().contains(accountName));
     }
 }
