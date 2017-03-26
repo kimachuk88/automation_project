@@ -29,12 +29,23 @@ public class LoginPage extends BasePage {
     @FindBy(id = "PersistentCookie")
     private CheckBox chkStaySignedIn;
 
+    @FindBy(id = "errormsg_0_Email")
+    private Label errorInvalidUser;
+
+    @FindBy(id = "errormsg_0_Passwd")
+    private Label errorInvalidPasswd;
+
+    @FindBy(id = "email-display")
+    private Label emailDisplayed;
+
     public void setEmail(String email) {
         emailField.setText(email);
     }
 
     public void clickNext() {
+        waitForControl(btnNext);
         btnNext.click();
+        waitForPageLoad();
     }
 
     public String getProfileName() {
@@ -42,9 +53,29 @@ public class LoginPage extends BasePage {
         return Label.getText(profileName);
     }
 
+    public String getDisplayedEmail() {
+        waitForPageLoad();
+        waitForControl(emailDisplayed);
+        emailDisplayed.moveToElement();
+        return Label.getText(emailDisplayed);
+    }
+
+    public String getTextError(){
+        waitForPageLoad();
+        waitForControl(errorInvalidUser);
+        errorInvalidUser.moveToElement();
+        return Label.getText(errorInvalidUser);
+    }
+
+    public String getTextErrorPasswd(){
+        errorInvalidPasswd.moveToElement();
+        return Label.getText(errorInvalidPasswd);
+    }
+
     public void setPassword(String password) {
         waitForControl(passwordField);
         passwordField.setText(password);
+        waitForPageLoad();
     }
 
     public void clickSignIn(){

@@ -57,11 +57,14 @@ public class MessagePage extends BasePage {
     }
 
     public void clickOnComposeMessage(){
-        waitForControl(btnCompose);
+        waitForPageLoad();
+        waitElementToClick(btnCompose);
         btnCompose.click();
     }
 
     public void setReceiver(String receiveEmail){
+        waitForPageLoad();
+        waitForControl(fieldTo);
         fieldTo.setText(receiveEmail);
     }
 
