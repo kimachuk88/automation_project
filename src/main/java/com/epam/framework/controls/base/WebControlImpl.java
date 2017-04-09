@@ -117,10 +117,10 @@ public abstract class WebControlImpl implements WebControl {
     }
 
     public void clickJS() {
-        ((JavascriptExecutor)Driver.instance).executeScript("arguments[0].click();", element);
+        ((JavascriptExecutor)Driver.getInstance().getDriver()).executeScript("arguments[0].click();", element);
     }
 
     public void moveToElement(){
-        new Actions(Driver.instance).moveToElement(element).perform();
+        new Actions(Driver.getInstance().getDriver()).moveToElement(element).perform();
     }
 }
