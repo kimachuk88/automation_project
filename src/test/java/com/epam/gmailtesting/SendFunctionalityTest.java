@@ -12,18 +12,8 @@ import org.testng.annotations.Test;
  */
 public class SendFunctionalityTest extends BaseTest {
 
-    private SendMessageBO sendMessageBO;
-    private LoginBO loginBO;
-
-    public void setup(){
-        sendMessageBO = new SendMessageBO();
-        loginBO = new LoginBO();
-    }
-
-
     @Test(description = "Login, open custom search page\n",  dataProviderClass = DataProvd.class, dataProvider = "login")
     public void login(String homeTitle, String email,String accountName){
-        setup();
         Assert.assertEquals(loginBO.checkPageTitle(), homeTitle);
         loginBO.loginEmail(Config.getProperty(Config.USERNAME));
         Assert.assertEquals(loginBO.getEmailDisplayed(),email);

@@ -23,56 +23,65 @@ import java.util.SimpleTimeZone;
  */
 public class Driver {
 
-    private static Logger log = Logger.getLogger("WD");
-    public static WebDriver instance;
-    private static final String PATH_TO_DRIVERS_REPOSITORY = "src/main/resources/drivers/";
+    private Logger log = Logger.getLogger("WD");
+    private WebDriver driver;
+    private final String PATH_TO_DRIVERS_REPOSITORY = "src/main/resources/drivers/";
 
-    private Driver(){}
+    private Driver() {
+    }
 
-    public static WebDriver getWebDriverInstance()  {
-        if (instance == null) {
-            switch (Config.getProperty(Config.BROWSER)) {
-                case "chrome":
-                    System.setProperty("webdriver.chrome.driver",new File(PATH_TO_DRIVERS_REPOSITORY + "chromedriver.exe").getPath());
-                    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                    ChromeOptions options = new ChromeOptions();
-                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-                    instance = new ChromeDriver(capabilities);
-                    log.info("Create instance of Chrome Driver");
-                    break;
-                case "firefox":
-                    instance = new FirefoxDriver();
-                    log.info("Create instance of FF Driver");
-                    break;
-                case "ie":
-                    System.setProperty("webdriver.ie.driver", new File(PATH_TO_DRIVERS_REPOSITORY +"IEDriverServer.exe").getPath());
-                    DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-                    caps.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP, true);
-                    caps.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-                    instance = new InternetExplorerDriver(caps);
-                    instance.manage().deleteAllCookies();
-                    break;
-                default:
-                    throw new IllegalArgumentException("Browser is not supported:" + Config.getProperty(Config.BROWSER));
-            }
-        }
+    private static Driver instance = new Driver();
+
+    public static Driver getInstance() {
         return instance;
     }
 
-    public static void stopDriver() {
-        if (instance != null) {
-            Set<String> windowHandles = instance.getWindowHandles();
-            for (String handle : windowHandles) {
-                instance.switchTo().window(handle);
-                instance.manage().deleteAllCookies();
-                instance.quit();
+    private ThreadLocal<WebDriver> threadLocal = new ThreadLocal<WebDriver>() {
+        @Override
+        protected WebDriver initialValue() {
+            if (driver == null) {
+                switch (Config.getProperty(Config.BROWSER)) {
+                    case "chrome":
+                        System.setProperty("webdriver.chrome.driver", new File(PATH_TO_DRIVERS_REPOSITORY + "chromedriver.exe").getPath());
+                        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                        ChromeOptions options = new ChromeOptions();
+                        options.addArguments("start-maximized");
+                        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                        driver = new ChromeDriver(capabilities);
+                        log.info("Create instance of Chrome Driver");
+                        break;
+                    case "firefox":
+                        driver = new FirefoxDriver();
+                        log.info("Create instance of FF Driver");
+                        break;
+                    case "ie":
+                        System.setProperty("webdriver.ie.driver", new File(PATH_TO_DRIVERS_REPOSITORY + "IEDriverServer.exe").getPath());
+                        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
+                        caps.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP, true);
+                        caps.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+                        driver = new InternetExplorerDriver(caps);
+                        driver.manage().deleteAllCookies();
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Browser is not supported:" + Config.getProperty(Config.BROWSER));
+                }
             }
-
-            log.info("Browser is closed");
+            return driver;
         }
-        instance = null;
+    };
+
+    public WebDriver getDriver() {
+        return threadLocal.get();
     }
 
-
+    public void removeDriver() {
+        driver = threadLocal.get();
+            try {
+                driver.manage().deleteAllCookies();
+                driver.quit();
+            } finally {
+                threadLocal.remove();
+        }
+    }
 }
 

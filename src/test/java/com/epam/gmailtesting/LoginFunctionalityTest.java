@@ -12,13 +12,6 @@ import org.testng.annotations.Test;
  */
 public class LoginFunctionalityTest extends BaseTest {
 
-    private SendMessageBO sendMessageBO;
-    private LoginBO loginBO;
-
-    public void setup(){
-        sendMessageBO = new SendMessageBO();
-        loginBO = new LoginBO();
-    }
 
     @Test(description = "\n" +
             "1. Go to https://mail.google.com/mail/\n" +
@@ -26,27 +19,26 @@ public class LoginFunctionalityTest extends BaseTest {
             "3.  Set invalid username (illegal characters) and click on next\n" +
             "4.  Set invalid username (over 256 characters ) and click on next\n" , dataProviderClass = DataProvd.class, dataProvider = "invalidLogin")
     public void loginWithInvalidEmail( String invalidUser, String errorMessage){
-        setup();
         loginBO.loginEmail(invalidUser);
         Assert.assertTrue(loginBO.getErrorMessage().contains(errorMessage));
     }
 
 
     @Test(description = "\n" +
-            "1. Go to https://mail.google.com/mail/\n" +
-            "2. Set valid username, but invalid password and click on next\n" , dependsOnMethods = "loginWithInvalidEmail", dataProviderClass = DataProvd.class, dataProvider = "invalidPasswd")
+            "1. Go to https://mail.google.com/mail /\n" +
+            "2. Set valid username, but invalid password and click on next\n" , dataProviderClass = DataProvd.class, dataProvider = "invalidPasswd", priority = 1)
     public void loginWithInvalidPassword(String invalidPasswd, String errorInvPasswd){
-        setup();
         loginBO.loginEmail(Config.getProperty(Config.USERNAME));
         loginBO.loginPasswd(invalidPasswd);
         Assert.assertEquals(loginBO.getErrorMessagePasswd(), errorInvPasswd);
+
     }
 
 
     @Test(description = "\n" +
             "1. Check email/\n" +
             "2. Set valid password and click on next\n"+
-            "3. Check account name\n" , dependsOnMethods = "loginWithInvalidPassword", dataProviderClass = DataProvd.class, dataProvider = "login")
+            "3. Check account name\n" , dataProviderClass = DataProvd.class, dataProvider = "login", priority = 2)
     public void loginWithValidCredentials(String title, String email, String accountName){
         Assert.assertEquals(loginBO.checkPageTitle(),title);
         Assert.assertEquals(loginBO.getEmailDisplayed(),email);

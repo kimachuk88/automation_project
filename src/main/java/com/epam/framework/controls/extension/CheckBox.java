@@ -15,7 +15,7 @@ public class CheckBox extends WebControlImpl {
 
     private WebElement element;
     private int wait = 5;
-    private WebDriverWait driverWait = new WebDriverWait(Driver.instance, wait);
+    private WebDriverWait driverWait = new WebDriverWait(Driver.getInstance().getDriver(), wait);
 
     public CheckBox(WebElement element) {
         super(element);
