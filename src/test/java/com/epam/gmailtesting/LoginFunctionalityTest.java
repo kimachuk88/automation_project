@@ -25,7 +25,7 @@ public class LoginFunctionalityTest extends BaseTest {
 
 
     @Test(description = "\n" +
-            "1. Go to https://mail.google.com/mail/\n" +
+            "1. Go to https://mail.google.com/mail /\n" +
             "2. Set valid username, but invalid password and click on next\n" , dataProviderClass = DataProvd.class, dataProvider = "invalidPasswd", priority = 1)
     public void loginWithInvalidPassword(String invalidPasswd, String errorInvPasswd){
         loginBO.loginEmail(Config.getProperty(Config.USERNAME));
