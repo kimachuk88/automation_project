@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel test suite" parallel="classes" thread-count="2">
+    <listeners>
+        <listener class-name="com.epam.framework.utility.BaseHTMLReporter"/>
+    </listeners>
+    <test name="Test 1">
+        <classes>
+            <class name="com.epam.gmailtesting.LoginFunctionalityTest"/>
+            <class name="com.epam.gmailtesting.SendFunctionalityTest"/>
+        </classes>
+    </test>
+</suite>
