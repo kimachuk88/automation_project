@@ -26,6 +26,7 @@ public class Driver {
     private Logger log = Logger.getLogger("WD");
     private WebDriver driver;
     private final String PATH_TO_DRIVERS_REPOSITORY = "src/main/resources/drivers/";
+    private String browserName = System.getProperty("browserName");
 
     private Driver() {
     }
@@ -40,7 +41,7 @@ public class Driver {
         @Override
         protected WebDriver initialValue() {
             if (driver == null) {
-                switch (Config.getProperty(Config.BROWSER)) {
+                switch (browserName) {
                     case "chrome":
                         System.setProperty("webdriver.chrome.driver", new File(PATH_TO_DRIVERS_REPOSITORY + "chromedriver.exe").getPath());
                         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
@@ -63,7 +64,7 @@ public class Driver {
                         driver.manage().deleteAllCookies();
                         break;
                     default:
-                        throw new IllegalArgumentException("Browser is not supported:" + Config.getProperty(Config.BROWSER));
+                        throw new IllegalArgumentException("Browser is not supported:" + browserName);
                 }
             }
             return driver;

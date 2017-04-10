@@ -12,7 +12,6 @@ public class Config {
     public static final String URL = "url";
     private static Properties config;
     protected static String DEFAULT_CONFIG_NAME = "web_driver";
-    public static final String BROWSER = "browser";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
 
