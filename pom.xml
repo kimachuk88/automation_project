@@ -30,11 +30,15 @@
                             <value>false</value>
                         </property>
                         <listeners>
-                            <listener class-name="package com.epam.framework.utility.BaseHTMLReporter"/>
+                            <listener class-name="com.epam.framework.utility.BaseHTMLReporter"/>
                         </listeners>
                     </properties>
                     <reportsDirectory>${project.basedir}/target</reportsDirectory>
                     <workingDirectory>${project.basedir}</workingDirectory>
+
+                        <suiteXmlFiles>
+                            <suiteXmlFile>testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
 
                 </configuration>
             </plugin>
@@ -69,6 +73,11 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>1.6.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>
