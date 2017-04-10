@@ -16,11 +16,5 @@ buildNumber.properties
 log/
 test-output/
 target/
-*.png
-*.html
-*.xml
-*.js
-*.css
-*.gif
 *.log
 *.exe
