@@ -39,7 +39,12 @@
                         <suiteXmlFiles>
                             <suiteXmlFile>testng.xml</suiteXmlFile>
                         </suiteXmlFiles>
-
+                    <systemProperties>
+                        <property>
+                            <name>browserName</name>
+                            <value>$browserName</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
 
