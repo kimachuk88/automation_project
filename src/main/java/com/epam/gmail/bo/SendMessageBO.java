@@ -12,6 +12,7 @@ import com.epam.gmail.pages.SentMessagesPage;
 public class SendMessageBO extends BaseBO{
     private MessagePage messagePage = new MessagePage();
     private SentMessagesPage sentMessagesPage = new SentMessagesPage();
+    private String browserName = System.getProperty("browserName");
 
 
     public String checkAccountName(){
@@ -36,7 +37,7 @@ public class SendMessageBO extends BaseBO{
     }
 
     public String checkSentMessage(){
-        if (! Config.getProperty(Config.BROWSER).equalsIgnoreCase("ie")) {
+        if (! browserName.equalsIgnoreCase("ie")) {
             messagePage.clickOnSentFolder();
         }
         sentMessagesPage.clickOnViewMessage();
