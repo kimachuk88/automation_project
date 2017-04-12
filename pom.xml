@@ -33,7 +33,7 @@
                             <listener class-name="com.epam.framework.utility.BaseHTMLReporter"/>
                         </listeners>
                     </properties>
-                    <reportsDirectory>${project.basedir}/test-output</reportsDirectory>
+                    <reportsDirectory>${project.basedir}/target/test-output</reportsDirectory>
                     <workingDirectory>${project.basedir}</workingDirectory>
 
                         <suiteXmlFiles>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.5</version>
+            <version>6.9.9</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>

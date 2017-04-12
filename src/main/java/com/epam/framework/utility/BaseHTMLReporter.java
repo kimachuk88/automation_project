@@ -33,9 +33,9 @@ public class BaseHTMLReporter  extends HTMLReporter implements ITestListener {
                 System.setProperty(ESCAPE_PROPERTY, "false");
                 String failureImageFileName = result.getName() + ".png";
                 File scrFile = ((TakesScreenshot) Driver.getInstance().getDriver()).getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(scrFile, new File("test-output/"+failureImageFileName ));
+                FileUtils.copyFile(scrFile, new File("target/test-output/"+failureImageFileName ));
                 Reporter.setCurrentTestResult(result);
-                String fileName = System.getProperty("user.dir") + File.separator+ "test-output"+File.separator + failureImageFileName;
+                String fileName = System.getProperty("user.dir") + File.separator+ "target/test-output"+File.separator + failureImageFileName;
                 Reporter.log("<a href=\""+fileName+"\"> Click here to take a look at screenshot </a>");
 
             }catch (IOException e){
