@@ -91,19 +91,6 @@ public class Driver {
         } finally {
             threadLocal.remove();
         }
-
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            String[] processes = {"iexplorer.exe", "ie.exe", "chromedriver.exe", "ie32.exe"};
-            try {
-                for (String process : processes) {
-                    Runtime.getRuntime().exec("taskkill /f /t /im " + process).waitFor();
-                }
-            } catch (IOException e) {
-                log.error("Failed to kill process: " + e.getMessage());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
 
