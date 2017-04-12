@@ -6,12 +6,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.HttpCookie;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,11 +42,12 @@ public class Driver {
     private ThreadLocal<WebDriver> threadLocal = new ThreadLocal<WebDriver>() {
         @Override
         protected WebDriver initialValue() {
+            DesiredCapabilities capabilities;
             if (driver == null) {
                 switch (browserName) {
                     case "chrome":
                         System.setProperty("webdriver.chrome.driver", new File(PATH_TO_DRIVERS_REPOSITORY + "chromedriver.exe").getPath());
-                        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+                        capabilities = DesiredCapabilities.chrome();
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("start-maximized");
                         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
@@ -57,12 +60,17 @@ public class Driver {
                         break;
                     case "ie":
                         System.setProperty("webdriver.ie.driver", new File(PATH_TO_DRIVERS_REPOSITORY + "IEDriverServer.exe").getPath());
-                        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-                        caps.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP, true);
-                        caps.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-                        driver = new InternetExplorerDriver(caps);
+                        capabilities = DesiredCapabilities.internetExplorer();
+                        capabilities.setCapability(InternetExplorerDriver.ENABLE_ELEMENT_CACHE_CLEANUP, true);
+                        capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+                        driver = new InternetExplorerDriver(capabilities);
                         driver.manage().deleteAllCookies();
                         break;
+                    case "edge":
+                        System.setProperty("webdriver.edge.driver", new File(PATH_TO_DRIVERS_REPOSITORY + "MicrosoftWebDriver.exe").getPath());
+                        capabilities = DesiredCapabilities.edge();
+                        driver = new EdgeDriver(capabilities);
+                        driver.manage().deleteAllCookies();
                     default:
                         throw new IllegalArgumentException("Browser is not supported:" + browserName);
                 }
@@ -77,11 +85,24 @@ public class Driver {
 
     public void removeDriver() {
         driver = threadLocal.get();
+        try {
+            driver.manage().deleteAllCookies();
+            driver.quit();
+        } finally {
+            threadLocal.remove();
+        }
+
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            String[] processes = {"iexplorer.exe", "ie.exe", "chromedriver.exe", "ie32.exe"};
             try {
-                driver.manage().deleteAllCookies();
-                driver.quit();
-            } finally {
-                threadLocal.remove();
+                for (String process : processes) {
+                    Runtime.getRuntime().exec("taskkill /f /t /im " + process).waitFor();
+                }
+            } catch (IOException e) {
+                log.error("Failed to kill process: " + e.getMessage());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

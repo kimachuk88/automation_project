@@ -32,8 +32,7 @@ public abstract class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass()  {
-        System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "default-src 'self'; style-src 'self' 'unsafe-inline';");
-        dir = new File("test-output");
+       dir = new File("test-output");
         logFile = new File("logfile.log");
         if(dir.exists()) {
             try {
