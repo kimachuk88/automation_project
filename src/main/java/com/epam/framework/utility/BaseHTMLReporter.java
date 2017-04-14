@@ -36,7 +36,7 @@ public class BaseHTMLReporter  extends HTMLReporter implements ITestListener {
                 FileUtils.copyFile(scrFile, new File("target/test-output/"+failureImageFileName ));
                 Reporter.setCurrentTestResult(result);
                 String fileName = System.getProperty("user.dir") + File.separator+ "target" +"\\" + "test-output"+File.separator + failureImageFileName;
-                Reporter.log("<a href=\""+fileName+"\"> Click here to take a look at screenshot </a>");
+                Reporter.log("<a href=\"file://"+fileName+"\"> Click here to take a look at screenshot </a>");
 
             }catch (IOException e){
                 e.printStackTrace();
