@@ -31,14 +31,12 @@ public abstract class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass()  {
-        File dir_driver = new File("drivers");
         logFile = new File("logfile.log");
         try {
             FileUtils.forceDelete(logFile);
-            FileUtils.cleanDirectory(dir_driver);
-                log.info("Clean up folder with drivers");
+                log.info("Clean up logs");
             } catch (IOException e) {
-                log.info("Failed to clean up folder with drivers");
+                log.info("Failed to clean up logs");
             }
 
         WebDriver driver = Driver.getInstance().getDriver();
