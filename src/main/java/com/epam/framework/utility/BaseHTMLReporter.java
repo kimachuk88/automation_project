@@ -29,15 +29,13 @@ public class BaseHTMLReporter  extends HTMLReporter implements ITestListener {
     @Override
     public void onTestFailure(final ITestResult result)  {
 
-        String fileName ="target/test-output/html/";
        if (!result.isSuccess()) {
             try {
                 System.setProperty(ESCAPE_PROPERTY, "false");
                 String failureImageFileName = result.getName() + ".png";
                 File scrFile = ((TakesScreenshot) Driver.getInstance().getDriver()).getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(scrFile, new File(fileName+failureImageFileName ));
+                FileUtils.copyFile(scrFile, new File("target/test-output/html/"+failureImageFileName ));
                 Reporter.setCurrentTestResult(result);
-               // String fileName =  "target" +"\\" + "test-output"+File.separator + failureImageFileName;
                 Reporter.log("<a href=\""+ failureImageFileName + "\"> Click here to take a look at screenshot </a>");
 
             }catch (IOException e){

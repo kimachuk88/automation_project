@@ -27,22 +27,20 @@ public abstract class BaseTest {
     protected Logger log = Logger.getLogger("WD: ");
     protected SendMessageBO sendMessageBO;
     protected LoginBO loginBO;
-    private File dir;
     private File logFile;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass()  {
-       dir = new File("test-output");
+        File dir_driver = new File("drivers");
         logFile = new File("logfile.log");
-        if(dir.exists()) {
-            try {
-                FileUtils.deleteDirectory(dir);
-                FileUtils.forceDelete(logFile);
-                log.info("Clean up test-output folder");
+        try {
+            FileUtils.forceDelete(logFile);
+            FileUtils.cleanDirectory(dir_driver);
+                log.info("Clean up folder with drivers");
             } catch (IOException e) {
-                log.info("Failed to delete test-output");
+                log.info("Failed to clean up folder with drivers");
             }
-        }
+
         WebDriver driver = Driver.getInstance().getDriver();
         driver.get(Config.getProperty(Config.URL));
         driver.manage().timeouts().pageLoadTimeout(20,TimeUnit.SECONDS);
