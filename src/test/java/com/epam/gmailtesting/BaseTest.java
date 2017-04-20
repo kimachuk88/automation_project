@@ -58,22 +58,6 @@ public abstract class BaseTest {
     @AfterClass(alwaysRun = true)
     public void afterClass() throws IOException {
        Driver.getInstance().removeDriver();
-        closeDrivers();
     }
 
-    private void closeDrivers() {
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            String[] processes = {"iexplorer.exe", "ie.exe", "chromedriver.exe", "ie32.exe", "chromedriver.exe(32 bit)"};
-            try {
-                for (String process : processes) {
-                    Runtime.getRuntime().exec("taskkill /f /t /im " + process).waitFor();
-                }
-            }
-            catch (IOException e) {
-                log.warning("Failed to kill process: " + e.getMessage());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
