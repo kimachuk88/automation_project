@@ -58,7 +58,7 @@
                         <configuration>
                             <url>https://chromedriver.storage.googleapis.com/2.29/chromedriver_win32.zip</url>
                             <outputFileName>chromedriver_win32.zip</outputFileName>
-                            <outputDirectory>${project.basedir}/src/main/resources/drivers</outputDirectory>
+                            <outputDirectory>${project.basedir}/target/drivers</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

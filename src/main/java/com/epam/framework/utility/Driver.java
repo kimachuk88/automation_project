@@ -27,7 +27,7 @@ public class Driver {
 
     private Logger log = Logger.getLogger("WD");
     private WebDriver driver;
-    private final String PATH_TO_DRIVERS_REPOSITORY = "src/main/resources/drivers/";
+    private final String PATH_TO_DRIVERS_REPOSITORY = "target/drivers/";
     private String browserName = System.getProperty("browserName");
 
     private Driver() {
