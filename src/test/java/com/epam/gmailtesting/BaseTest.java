@@ -63,7 +63,7 @@ public abstract class BaseTest {
 
     private void closeDrivers() {
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            String[] processes = {"iexplorer.exe", "ie.exe", "chromedriver.exe", "ie32.exe"};
+            String[] processes = {"iexplorer.exe", "ie.exe", "chromedriver.exe", "ie32.exe", "chromedriver.exe(32 bit)"};
             try {
                 for (String process : processes) {
                     Runtime.getRuntime().exec("taskkill /f /t /im " + process).waitFor();
