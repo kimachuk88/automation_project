@@ -39,12 +39,9 @@
                         <suiteXmlFiles>
                             <suiteXmlFile>testng.xml</suiteXmlFile>
                         </suiteXmlFiles>
-                    <systemProperties>
-                        <property>
-                            <name>browserName</name>
-                            <value>$browserName</value>
-                        </property>
-                    </systemProperties>
+                    <systemPropertyVariables>
+                            <browserName>firefox</browserName>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
