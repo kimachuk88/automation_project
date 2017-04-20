@@ -91,6 +91,29 @@ public class Driver {
         } finally {
             threadLocal.remove();
         }
+        closeDrivers();
+    }
+
+    private void closeDrivers() {
+        switch (browserName) {
+            case "chrome":
+                try {
+                    Runtime.getRuntime().exec("taskkill /f /t /im " + "chromedriver.exe").waitFor();
+                } catch (IOException e) {
+                    log.error("Failed to kill process: " + e.getMessage());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "ie":
+                try {
+                    Runtime.getRuntime().exec("taskkill /f /t /im " + "IEDriverServer.exe").waitFor();
+                } catch (IOException e) {
+                    log.error("Failed to kill process: " + e.getMessage());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 }
-
